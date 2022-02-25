@@ -1,0 +1,102 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Simple Table</h4>
+                        <p class="card-category"> Here is a subtitle for this table</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="search-div">
+                                <!--  <mat-toolbar-row>-->
+                                <!--    <h4>Formats</h4>-->
+                                <!--  </mat-toolbar-row>-->
+                                <button  mat-stroked-button
+                                         color="primary"
+                                         (click)="onCreate()">
+                                    <mat-icon>add</mat-icon>Create
+                                </button>
+                                <button  mat-stroked-button
+                                         color="primary"
+                                         class="left-button"
+                                         (click)="exportAsXLSX()">
+                                    <mat-icon>get_app</mat-icon>Excel
+                                </button>
+                                <button class="left-button"
+                                        mat-stroked-button
+                                        color="warn">
+                                    <mat-icon>get_app</mat-icon>PDF
+                                </button>
+                                <mat-form-field class="search-form-field left" floatLabel="never">
+                                    <input matInput
+                                           placeholder="Search"
+                                           autocomplete="off"
+                                           [(ngModel)]="searchKey"
+                                           (keyup)="applyFilter()">
+                                    <button mat-button
+                                            matSuffix
+                                            mat-icon-button
+                                            *ngIf="searchKey"
+                                            aria-label="Clear"
+                                            (click)="onSearchClear()">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+
+                                </mat-form-field>
+
+                            </div>
+                            <mat-table [dataSource]="listData" matSort>
+                                <ng-container matColumnDef="firstName">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>First Name</mat-header-cell>
+                                    <mat-cell *matCellDef="let element">{{element.firstName}}</mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="lastName">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</mat-header-cell>
+                                    <mat-cell *matCellDef="let element">{{element.lastName}}</mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="email">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+                                    <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="phoneNumber">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>PhoneNumber</mat-header-cell>
+                                    <mat-cell *matCellDef="let element">{{element.phoneNumber}}</mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="actions">
+                                    <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+                                    <mat-cell *matCellDef="let row">
+                                        <button mat-icon-button><mat-icon>launch</mat-icon></button>
+                                        <button mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+                                    </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="loading">
+                                    <mat-footer-cell *matFooterCellDef colspan="6">
+                                        Loading data...
+                                    </mat-footer-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="noData">
+                                    <mat-footer-cell *matFooterCellDef colspan="6">
+                                        No data...
+                                    </mat-footer-cell>
+                                </ng-container>
+                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+<!--                                <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>-->
+                            </mat-table>
+                            <mat-paginator [length]="100"
+                                           [pageSize]="5"
+                                           [pageSizeOptions]="[5, 10, 25, 100]"
+                                           aria-label="Select page">
+                            </mat-paginator>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
